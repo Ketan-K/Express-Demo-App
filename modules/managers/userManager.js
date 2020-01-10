@@ -1,24 +1,24 @@
-const User = require("../models/userModel");
+const User = require("../models/userModel")
 
 let listUsers = () => {
   return new Promise(function (resolve, reject) {
     User.findAll()
       .then(users => {
         if (users.length == 0)
-          return resolve({ status: 0, message: "No User Found" });
-        return resolve({ status: 1, list: users });
+          return resolve({ status: 0, message: "No User Found" })
+        return resolve({ status: 1, list: users })
       })
       .catch(err => {
-        console.log("ListUser Error :: " + err);
-        return reject({ status: 404, message: err.message });
-      });
-  });
-};
+        console.log("ListUser Error :: " + err)
+        return reject({ status: 404, message: err.message })
+      })
+  })
+}
 
 let addUser = user => {
   /*
     if (!user.username || !user.password || !user.email)
-      throw new BadRequestError('Request Data missing');
+      throw new BadRequestError('Request Data missing') 
   */
   return new Promise(function (resolve, reject) {
 
@@ -27,13 +27,13 @@ let addUser = user => {
 
     User.create(user)
       .then(data => {
-        return resolve({ status: 0, data: data });
+        return resolve({ status: 0, data: data })
       })
       .catch(err => {
-        return reject({ status: -1, message: err.errors[0].message });
-      });
-  });
-};
+        return reject({ status: -1, message: err.errors[0].message })
+      })
+  })
+}
 
 let login = user => {
 
@@ -47,9 +47,9 @@ let login = user => {
     }).catch((err) => {
       console.log(err)
       return reject({ status: -1, message: err.message })
-    });
-  });
-};
+    })
+  })
+}
 
 let logout = authToken => {
   console.log("LOGOUT")
@@ -89,4 +89,4 @@ module.exports = {
   login: login,
   logout: logout,
   updatepassword: updatepassword
-};
+} 

@@ -9,6 +9,6 @@ var config = {
     port: 3306,
     host: "localhost"
   }
-};
+}
 
-module.exports = config;
+module.exports = config 

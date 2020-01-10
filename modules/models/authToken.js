@@ -1,7 +1,7 @@
-const sequelize_mysql = require("../helpers/sequelize-mysql");
-const sequelize = require("sequelize");
+const sequelize_mysql = require("../helpers/sequelize-mysql")
+const sequelize = require("sequelize")
 const User = require("./userModel")
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt")
 
 const AuthToken = sequelize_mysql.define("AuthToken", {
     token: {
@@ -11,14 +11,14 @@ const AuthToken = sequelize_mysql.define("AuthToken", {
     }
 })
 
-//AuthToken.belongsTo(User);
+//AuthToken.belongsTo(User) 
 
 AuthToken.generate = async function (User) {
     if (!User) {
         throw new Error('AuthToken requires a user ID')
     }
     let token = bcrypt.hashSync(User.username, bcrypt.genSaltSync(10), null)
-    return AuthToken.create({ token });
+    return AuthToken.create({ token })
 }
 
-module.exports = AuthToken;
+module.exports = AuthToken 
