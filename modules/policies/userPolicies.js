@@ -5,4 +5,13 @@ let isValidUser = (req, res, next) => {
   return next()
 }
 
-module.exports = { isValidUser: isValidUser } 
+
+let isAdmin = (req, res, next) => {
+  //if isValidUser && user.role == admin
+  return next();
+}
+
+module.exports = {
+  isValidUser: isValidUser,
+  isAdmin: isAdmin
+} 

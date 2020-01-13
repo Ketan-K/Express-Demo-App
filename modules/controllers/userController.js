@@ -12,7 +12,7 @@ let listUsers = function (req, res, next) {
 }
 
 //Register new user
-let addUser = function (req, res, next) {
+let addUser = function (req, res) {
   console.log("Controller :: addUser.")
   return userManager
     .addUser(req.body)
@@ -25,7 +25,7 @@ let addUser = function (req, res, next) {
 }
 
 
-let login = function (req, res, next) {
+let login = function (req, res) {
   console.log("Controller :: login.")
   return userManager
     .login(req.body)
@@ -38,7 +38,7 @@ let login = function (req, res, next) {
 }
 
 
-let logout = function (req, res, next) {
+let logout = function (req, res) {
   console.log("Controller :: logout.")
   return userManager
     .logout(req.header('authToken'))
@@ -50,7 +50,7 @@ let logout = function (req, res, next) {
     })
 }
 
-let updatepassword = function (req, res, next) {
+let updatepassword = function (req, res) {
   console.log("Controller :: logout.")
   return userManager
     .updatepassword(req.body)

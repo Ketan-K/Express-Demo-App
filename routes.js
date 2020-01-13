@@ -1,6 +1,7 @@
 "use strict"
 module.exports = app => {
   app.use("/user", require("./modules/routes/userRoutes"))
+  app.use("/category", require("./modules/routes/categoryRoutes"))
 
   app.use((req, res, next) => {
     if (res.headerSent) return next()

@@ -6,11 +6,11 @@ let listUsers = () => {
       .then(users => {
         if (users.length == 0)
           return resolve({ status: 0, message: "No User Found" })
-        return resolve({ status: 1, list: users })
+        return resolve({ status: 0, list: users })
       })
       .catch(err => {
         console.log("ListUser Error :: " + err)
-        return reject({ status: 404, message: err.message })
+        return reject({ status: -1, message: err.message })
       })
   })
 }
