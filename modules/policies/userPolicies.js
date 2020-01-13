@@ -1,14 +1,48 @@
-let isValidUser = (req, res, next) => {
+const AuthToken = require("../models/authToken"),
+  User = require("../models/userModel");
+
+
+let isValidUser = async (req, res, next) => {
   //if req.body.user is not valid return invalid user request
   //else next() 
+  authToken = await req.header('authToken')
+  if (!authToken)
+    return res.json({ status: -1, message: "Header Absent" })
+  AuthToken.findOne({ where: { token: authToken } })
+    .then(token => {
+      if (token)
+        token.getUser()
+          .then(user => {
+            if (user.username)
+              return next()
+            else
+              return res.send({ status: -1, message: "User not found" })
+          })
+      else
+        return res.send({ status: -1, message: "Invalid Token" })
 
-  return next()
+    })
+
 }
 
 
-let isAdmin = (req, res, next) => {
-  //if isValidUser && user.role == admin
-  return next();
+let isAdmin = async (req, res, next) => {
+  authToken = await req.header('authToken')
+  if (!authToken)
+    return res.json({ status: -1, message: "Header Absent" })
+  AuthToken.findOne({ where: { token: authToken } })
+    .then(token => {
+      if (token)
+        token.getUser()
+          .then(user => {
+            if (user.role == "admin")
+              return next()
+            else
+              return res.send({ status: -1, message: "Unauthorized Request" })
+          })
+      else
+        return res.json({ status: -1, message: "Invalid Token" })
+    })
 }
 
 module.exports = {
