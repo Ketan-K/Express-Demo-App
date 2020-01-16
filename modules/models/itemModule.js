@@ -20,7 +20,6 @@ Item = sequelize_mysql.define("item", {
     },
     image: {
         type: sequelize.STRING
-        //  allowNull: false
     },
     description: {
         type: sequelize.TEXT
