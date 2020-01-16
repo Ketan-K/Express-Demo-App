@@ -5,7 +5,7 @@ const AuthToken = require("../models/authToken"),
 let isValidUser = async (req, res, next) => {
   //if req.body.user is not valid return invalid user request
   //else next() 
-  authToken = await req.header('authToken')
+  let authToken = await req.header('authToken')
   if (!authToken)
     return res.json({ status: -1, message: "Header Absent" })
   AuthToken.findOne({ where: { token: authToken } })
@@ -27,7 +27,7 @@ let isValidUser = async (req, res, next) => {
 
 
 let isAdmin = async (req, res, next) => {
-  authToken = await req.header('authToken')
+ let authToken = await req.header('authToken')
   if (!authToken)
     return res.json({ status: -1, message: "Header Absent" })
   AuthToken.findOne({ where: { token: authToken } })
