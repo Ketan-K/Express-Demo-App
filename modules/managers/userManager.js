@@ -4,8 +4,6 @@ let listUsers = () => {
   return new Promise(function (resolve, reject) {
     User.findAll()
       .then(users => {
-        if (users.length == 0)
-          return resolve({ status: 0, message: "No User Found" })
         return resolve({ status: 0, list: users })
       })
       .catch(err => {
@@ -16,10 +14,7 @@ let listUsers = () => {
 }
 
 let addUser = user => {
-  /*
-    if (!user.username || !user.password || !user.email)
-      throw new BadRequestError('Request Data missing') 
-  */
+
   return new Promise(function (resolve, reject) {
 
     if (!user.username || !user.password || !user.email)
