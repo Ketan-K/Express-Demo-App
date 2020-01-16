@@ -42,7 +42,7 @@ User.prototype.authorize = async function () {
 }
 
 User.authenticate = async function (username, password) {
-  const user = await User.findOne({ where: { username } })
+  const user = await User.findOne({ where: { username: username } })
   if (!user)
     throw new Error('No user found')
 
