@@ -1,5 +1,6 @@
 const itemModule = require("../models/itemModule"),
     itemHelper = require("../helpers/itemHelper")
+
 let addItem = (item) => {
     return new Promise(function (resolve, reject) {
         if (!item.name)
@@ -29,6 +30,7 @@ let addItem = (item) => {
 
     })
 }
+
 let listItem = () => {
     return new Promise(function (resolve, reject) {
         itemModule.findAll()

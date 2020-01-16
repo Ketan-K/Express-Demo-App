@@ -23,7 +23,6 @@ let saveBase64Image = (dataString, path) => {
         }
         let base64Image = dataString.split(';base64,').pop();
         fs.writeFileSync(path, base64Image, { encoding: 'base64' }, function (err) {
-            console.log('File created');
             return resolve("File Created")
         });
     })
