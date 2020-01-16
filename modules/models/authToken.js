@@ -15,7 +15,7 @@ const AuthToken = sequelize_mysql.define("AuthToken", {
 
 AuthToken.generate = async function (User) {
     if (!User) {
-        throw new Error('AuthToken requires a user ID')
+        throw new Error('AuthToken requires a valid user')
     }
     let token = bcrypt.hashSync(User.username, bcrypt.genSaltSync(10), null)
     return AuthToken.create({ token })
