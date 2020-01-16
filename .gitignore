@@ -93,6 +93,7 @@ dist
 
 # Serverless directories
 .serverless/
+images/
 
 # FuseBox cache
 .fusebox/
@@ -105,7 +106,7 @@ dist
 
 
 ### Code ###
-.vscode/*
+.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
