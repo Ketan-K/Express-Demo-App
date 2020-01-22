@@ -7,6 +7,7 @@ app.use(express.json())
 app.get("/", (req, res) => {
   res.send("Hey ! This is demo application")
 })
+app.use(express.static('images'));
 
 console.log("Setting up routes.")
 require("./routes")(app)
