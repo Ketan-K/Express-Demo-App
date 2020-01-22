@@ -3,7 +3,7 @@ const sequelize = require("sequelize")
 const bcrypt = require("bcrypt")
 const AuthToken = require("./authToken")
 const sequelize_mysql = require("../helpers/sequelize-mysql")
-const User = sequelize_mysql.define("user", {
+const User = sequelize_mysql.define("User", {
   username: {
     type: sequelize.STRING,
     unique: true,
