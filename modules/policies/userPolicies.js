@@ -14,7 +14,7 @@ let isValidUser = async (req, res, next) => {
         token.getUser()
           .then(user => {
             if (user.username) {
-              req.headers['uid'] = user.id;
+              req.headers['uid'] = user.username;
               return next()
             }
             else
@@ -37,8 +37,10 @@ let isAdmin = async (req, res, next) => {
       if (token)
         token.getUser()
           .then(user => {
-            if (user.role == "admin")
+            if (user.role == "admin") {
+              req.headers['uid'] = user.username;
               return next()
+            }
             else
               return res.send({ status: -1, message: "Unauthorized Request" })
           })
