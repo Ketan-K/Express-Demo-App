@@ -3,13 +3,13 @@ const itemModule = require("../models/itemModule"),
 
 let addItem = (item) => {
     return new Promise(function (resolve, reject) {
-        if (!item.name || !item.price || !item.CategoryCode)
+        if (!item.name || !item.price || !item.categoryCode)
             return reject({ status: -1, message: "Request Data Missing" });
         itemHelper.generateNewItemCode().then(
             code => {
                 item.code = code;
                 if (item.image) {
-                    let path = './images/' + item.code + ".jpeg";
+                    let path = './public/images/' + item.code + ".jpeg";
                     itemHelper.saveBase64Image(item.image, path)
                     item.image = path;
                 }
