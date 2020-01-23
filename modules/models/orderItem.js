@@ -3,7 +3,7 @@ const sequelize = require("sequelize"),
     Orders = require("./orderModel"),
     Items = require("./itemModule");
 
-OrderItem = sequelize_mysql.define("OrderItem", {
+OrderItem = sequelize_mysql.define("orderItem", {
     price: {
         type: sequelize.DECIMAL,
         allowNull: false

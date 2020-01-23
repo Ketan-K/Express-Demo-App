@@ -2,7 +2,7 @@ const sequelize_mysql = require("../helpers/sequelize-mysql"),
   sequelize = require("sequelize"),
   User = require("./userModel");
 
-let Order = sequelize_mysql.define("Order", {
+let Order = sequelize_mysql.define("order", {
   orderId: {
     type: sequelize.STRING,
     primaryKey: true
@@ -37,7 +37,11 @@ let Order = sequelize_mysql.define("Order", {
   }
 });
 
-Order.belongsTo(User);
-User.hasMany(Order);
+Order.belongsTo(User, {
+  foreignKey: 'username'
+});
+User.hasMany(Order, {
+  foreignKey: 'username'
+});
 
 module.exports = Order;

@@ -3,11 +3,10 @@ const sequelize = require("sequelize")
 const bcrypt = require("bcrypt")
 const AuthToken = require("./authToken")
 const sequelize_mysql = require("../helpers/sequelize-mysql")
-const User = sequelize_mysql.define("User", {
+const User = sequelize_mysql.define("user", {
   username: {
     type: sequelize.STRING,
-    unique: true,
-    allowNull: false
+    primaryKey: true
   },
   email: {
     type: sequelize.STRING,
@@ -31,8 +30,12 @@ const User = sequelize_mysql.define("User", {
   }
 })
 
-User.hasMany(AuthToken)
-AuthToken.belongsTo(User)
+User.hasMany(AuthToken, {
+  foreignKey: 'username'
+})
+AuthToken.belongsTo(User, {
+  foreignKey: 'username'
+})
 
 User.prototype.authorize = async function () {
   const user = this

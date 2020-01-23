@@ -1,7 +1,7 @@
 const sequelize = require("sequelize"),
   sequelize_mysql = require("../helpers/sequelize-mysql"),
   Category = require("./categoryModule")
-let Item = sequelize_mysql.define("Item", {
+let Item = sequelize_mysql.define("item", {
   code: {
     type: sequelize.STRING,
     primaryKey: true,

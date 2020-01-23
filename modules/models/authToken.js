@@ -3,15 +3,13 @@ const sequelize = require("sequelize")
 const User = require("./userModel")
 const bcrypt = require("bcrypt")
 
-const AuthToken = sequelize_mysql.define("AuthToken", {
+const AuthToken = sequelize_mysql.define("authToken", {
     token: {
         type: sequelize.STRING,
         unique: true,
         allowNull: false
     }
 })
-
-//AuthToken.belongsTo(User) 
 
 AuthToken.generate = async function (User) {
     if (!User) {
