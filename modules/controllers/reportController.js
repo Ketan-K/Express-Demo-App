@@ -10,8 +10,9 @@ let orderReport = async (req, res) => {
 
 }
 
-let orderDetailReport = (req, res) => {
-    ReportManager.orderDetailReport(req.body)
+let orderDetailReport = async (req, res) => {
+    let uid = await req.header('uid')
+    ReportManager.orderDetailReport(req.body, uid)
         .then((data) => res.send(data))
         .catch(err => res.send(err))
 

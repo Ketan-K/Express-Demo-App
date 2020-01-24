@@ -9,7 +9,7 @@ let orderReport = (reportReq, uid) => {
             return reject({ status: -1, message: "Request Data Missing" });
         }
         reportReq.toDate = reportReq.toDate ? reportReq.toDate : new Date()
-        var filename = "./public/reports/" + uid + "-DETAIL-REPORT-" + new Date().getTime() + ".xlsx"
+        var filename = "./public/reports/" + uid + "-ORDER-REPORT-" + new Date().getTime() + ".xlsx"
         Orders.findAll({
             attributes: {
                 exclude: ['status', 'clientOrderId', 'createdAt', 'updatedAt']
@@ -43,25 +43,30 @@ let orderDetailReport = (reportReq, uid) => {
         // if (!reportReq.fromDate || !reportReq.toDate) {
         //     return reject({ status: -1, message: "Request Data Missing" });
         // }
+        var filename = "/reports/" + uid + "-ORDER-DETAIL-REPORT-" + new Date().getTime() + ".xlsx";
 
         Orders.findAll({
-            attributes: ['orderId', 'orderDate', 'username'],
+            attributes: ['orderId', 'orderDate', 'username', 'paymentMode'],
             include: [{
                 model: Items,
                 attributes: ['code', 'name'],
                 through: {
-                    attributes: ['quantity', 'price'
-                    ]
+                    attributes: ['quantity', 'price']
                 }
             }]
         })
             .then(result => {
-                if (!result) {
-                    return reject({ status: -1, message: "No Results" })
+                if (!result || result.length == 0) {
+                    return reject({ status: -1, message: "No Orders Found" })
                 }
 
-                return resolve({ status: 0, orders: result })
-
+                ReportHelper.makeExcelSheetForOrderDetailReport(result, "./public" + filename)
+                    .then(() => {
+                        return resolve({ status: 0, report: filename })
+                    })
+                    .catch(err => {
+                        return reject({ status: -1, message: err + "Error in report generation" })
+                    })
             })
 
     })
