@@ -38,10 +38,16 @@ let Order = sequelize_mysql.define("order", {
 });
 
 Order.belongsTo(User, {
-  foreignKey: 'username'
+  foreignKey: {
+    name: 'username',
+    allowNull: false
+  }
 });
 User.hasMany(Order, {
-  foreignKey: 'username'
+  foreignKey: {
+    name: 'username',
+    allowNull: false
+  }
 });
 
 module.exports = Order;

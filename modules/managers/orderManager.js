@@ -17,6 +17,7 @@ let placeOrder = (orderDetails, uid) => {
         }
         OrderHelper.generateNewOrderId().then(orderId => {
             orderDetails.orderId = orderId;
+            orderDetails.username = uid
         }).then(() => {
             Orders.create(orderDetails).then(order => {
                 let fLen = orderDetails.items.length;
