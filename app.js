@@ -2,8 +2,12 @@
 const express = require("express")
 const config = require("./config/config")
 const app = express(),
-  path = require("path")
+  path = require("path"),
+  cors = require('cors')
+
+
 app.use(express.json())
+app.use(cors())
 
 app.get("/", (req, res) => {
   res.send("Hey ! This is demo application")

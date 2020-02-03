@@ -19,7 +19,7 @@ let Item = sequelize_mysql.define("item", {
     allowNull: false
   },
   image: {
-    type: sequelize.STRING
+    type: sequelize.TEXT('long')
   },
   description: {
     type: sequelize.TEXT

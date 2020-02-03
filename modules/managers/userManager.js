@@ -35,10 +35,10 @@ let login = user => {
   return new Promise(function (resolve, reject) {
 
     if (!user.username || !user.password)
-      return reject({ status: -1, message: 'Request Data missing' })
+      return reject({ status: -1, message: 'Username or password is missing' })
 
-    User.authenticate(user.username, user.password).then((authToken) => {
-      return resolve({ status: 0, authToken: authToken, message: "Success" })
+    User.authenticate(user.username, user.password).then((user) => {
+      return resolve({ status: 0, user: user, message: "Login Successful." })
     }).catch((err) => {
       console.log(err)
       return reject({ status: -1, message: err.message })

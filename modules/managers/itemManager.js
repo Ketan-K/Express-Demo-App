@@ -9,8 +9,10 @@ let addItem = (item) => {
             code => {
                 item.code = code;
                 if (item.image) {
-                    let path = './public/images/' + item.code + ".jpeg";
-                    itemHelper.saveBase64Image(item.image, path)
+                    let path = '/images/' + item.code + ".jpeg";
+                    itemHelper.saveBase64Image(item.image, "./public" + path).catch(err => {
+                        item.image = "";
+                    })
                     item.image = path;
                 }
                 itemModule.create(item)
@@ -35,7 +37,6 @@ let listItem = () => {
     return new Promise(function (resolve, reject) {
         itemModule.findAll()
             .then(items => {
-                itemHelper.saveBase64Image("")
                 return resolve({ status: 0, list: items })
             })
             .catch(err => {

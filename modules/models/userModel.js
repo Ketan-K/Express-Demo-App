@@ -41,18 +41,18 @@ User.prototype.authorize = async function () {
   const user = this
   const authToken = await AuthToken.generate(user)
   await user.addAuthToken(authToken)
-  return authToken.token
+  return { authToken: authToken.token, username: user.username, email: user.email, role: user.role }
 }
 
 User.authenticate = async function (username, password) {
   const user = await User.findOne({ where: { username: username } })
   if (!user)
-    throw new Error('No user found')
+    throw new Error('No user found with this username')
 
   if (bcrypt.compareSync(password, user.password)) {
     return user.authorize()
   }
-  throw new Error('invalid password')
+  throw new Error('The password you have entered is invalid. Please try again.')
 }
 
 User.logout = async function (token) {
