@@ -3,11 +3,11 @@ var config = {
     port: 3000
   },
   mysql: {
-    database_name: "testdb",
-    user_name: "ketan",
-    password: "kspace",
+    database_name: "sql12338685",
+    user_name: "sql12338685",
+    password: "mNMXY4teLk",
     port: 3306,
-    host: "localhost"
+    host: "sql12.freemysqlhosting.net"
   }
 }
 
